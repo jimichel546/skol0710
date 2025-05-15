@@ -1,0 +1,16 @@
+[Unit]
+Description=uWSGI Service for JSON Uploader
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/jsonuploader
+ExecStart=/var/www/jsonuploader/venv/bin/uwsgi --ini /var/www/jsonuploader/uwsgi.ini
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target 

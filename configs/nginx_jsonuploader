@@ -1,0 +1,27 @@
+server {
+    listen 80;
+    server_name your_domain_or_ip;
+
+    # Логирование
+    access_log /var/log/nginx/jsonuploader_access.log;
+    error_log /var/log/nginx/jsonuploader_error.log;
+
+    # Favicon
+    location = /favicon.ico {
+        access_log off;
+        log_not_found off;
+    }
+    
+    # Статические файлы
+    location /static/ {
+        alias /var/www/jsonuploader/testtask/static/;
+    }
+
+    # Проксирование запросов к Django через uWSGI
+    location / {
+        uwsgi_pass unix:/var/www/jsonuploader/testtask.sock;
+        include uwsgi_params;
+        uwsgi_param UWSGI_SCHEME $scheme;
+        uwsgi_param SERVER_SOFTWARE nginx/$nginx_version;
+    }
+} 

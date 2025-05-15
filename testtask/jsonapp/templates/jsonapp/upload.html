@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Загрузка JSON | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Загрузка JSON файла</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="id_json_file" class="form-label">{{ form.json_file.label }}</label>
+                        {{ form.json_file }}
+                        {% if form.json_file.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.json_file.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Загрузить</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">Формат JSON</h4>
+            </div>
+            <div class="card-body">
+                <p>Файл должен содержать массив объектов в следующем формате:</p>
+                <pre><code>[
+    {
+        "name": "random string less than 50 characters",
+        "date": "date string in YYYY-MM-DD_HH:mm format"
+    },
+    ...
+]</code></pre>
+                <p>Требования:</p>
+                <ul>
+                    <li>Поле <code>name</code>: строка длиной не более 49 символов</li>
+                    <li>Поле <code>date</code>: строка в формате "YYYY-MM-DD_HH:mm"</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Добавляем Bootstrap-классы для формы
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('id_json_file').classList.add('form-control');
+    });
+</script>
+{% endblock %} 

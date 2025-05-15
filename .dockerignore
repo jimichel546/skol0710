@@ -1,0 +1,36 @@
+# Виртуальное окружение
+venv/
+ENV/
+.env
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media
+
+# Docker специфичные
+docker-compose.yml
+.dockerignore
+Dockerfile 
