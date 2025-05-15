@@ -25,7 +25,7 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone <URL репозитория> json-uploader
+   git clone https://github.com/jimichel546/skol0710.git
    cd json-uploader
    ```
 
